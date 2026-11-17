@@ -1,0 +1,39 @@
+{
+  "rules": {
+    "traa": {
+      ".write": "auth != null && auth.token.email == 'CORREO_ADMIN'",
+      "game": {
+        ".read": "auth != null"
+      },
+      "scores": {
+        ".read": "auth != null"
+      },
+      "players": {
+        ".read": "auth != null",
+        "$pid": {
+          ".write": "auth != null && newData.exists() && newData.child('uid').val() == auth.uid && $pid.matches(/^[a-z0-9-]{2,60}$/)",
+          ".validate": "newData.hasChildren(['name', 'last', 'uid'])",
+          "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 40" },
+          "last": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 40" },
+          "uid": { ".validate": "newData.isString()" },
+          "online": { ".validate": "newData.isBoolean()" },
+          "joinedAt": { ".validate": "newData.isNumber()" },
+          "$other": { ".validate": false }
+        }
+      },
+      "answers": {
+        ".read": "auth != null && auth.token.email == 'CORREO_ADMIN'",
+        "$q": {
+          "$pid": {
+            ".read": "auth != null && root.child('traa/players/' + $pid + '/uid').val() == auth.uid",
+            ".write": "auth != null && !data.exists() && newData.exists() && root.child('traa/players/' + $pid + '/uid').val() == auth.uid && root.child('traa/game/phase').val() == 'question' && root.child('traa/game/qKey').val() == $q && now <= root.child('traa/game/startedAt').val() + root.child('traa/game/durationMs').val() + 3000",
+            ".validate": "newData.hasChildren(['c', 't']) && newData.child('c').isString() && newData.child('c').val().matches(/^[ABC]$/) && newData.child('t').val() == now",
+            "c": { ".validate": true },
+            "t": { ".validate": true },
+            "$other": { ".validate": false }
+          }
+        }
+      }
+    }
+  }
+}
