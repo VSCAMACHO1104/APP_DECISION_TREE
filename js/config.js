@@ -22,11 +22,19 @@ export const CONFIG = {
   //      projectId: "traa-academia",
   //      appId: "1:123:web:abc",
   //    },
-  firebase: null,
+  firebase: const firebaseConfig = {
+  apiKey: "AIzaSyDLbtQihknvfkxdmB_PfLvWpLgezCufOFg",
+  authDomain: "traa-academia.firebaseapp.com",
+  databaseURL: "https://traa-academia-default-rtdb.firebaseio.com",
+  projectId: "traa-academia",
+  storageBucket: "traa-academia.firebasestorage.app",
+  messagingSenderId: "887065165436",
+  appId: "1:887065165436:web:3293e9ef1edaa00678d3f9"
+},
 
   // 2) Correo del usuario administrador creado en Firebase Authentication
   //    (Correo/contraseña). En la app solo se te pedirá la contraseña.
-  adminEmail: "",
+  adminEmail: "vcamacho@traarepuestos.com",
 
   // 3) Solo para el MODO DEMOSTRACIÓN: huella SHA-256 de la contraseña del
   //    administrador. Por defecto la contraseña es:  TRAA2026
