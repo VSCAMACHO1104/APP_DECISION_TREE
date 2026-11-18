@@ -11,7 +11,7 @@
 //  dinámica abriendo varias pestañas en la MISMA computadora.
 // =====================================================================
 
-export const CONFIG = {
+const firebaseConfig = {
   // 1) Configuración web de Firebase (Consola Firebase → Configuración del
   //    proyecto → Tus apps → SDK de Firebase → "Configuración").
   //    Ejemplo:
