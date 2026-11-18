@@ -72,22 +72,31 @@ justificación del documento aparecen al revelar la respuesta.
 3. **Realtime Database → Crear base de datos** (elige la ubicación más cercana, inicia en modo bloqueado).
    - En la pestaña **Reglas**, pega el contenido de [`database.rules.json`](database.rules.json),
      reemplaza las **dos** apariciones de `CORREO_ADMIN` por tu correo de administrador (en minúsculas) y **Publica**.
-4. **Configuración del proyecto (⚙️) → Tus apps → `</>` (Web)**: registra la app (no necesitas Hosting) y copia el objeto `firebaseConfig`.
-5. Edita [`js/config.js`](js/config.js):
+4. **Configuración del proyecto (⚙️) → Tus apps → `</>` (Web)**: registra la app (no necesitas Hosting).
+   En "SDK setup and configuration" elige la opción **Config** y copia el bloque completo, que empieza con
+   `const firebaseConfig = {` y termina con `};`.
+5. Edita [`js/config.js`](js/config.js) en GitHub (ícono del lápiz). Solo hay **dos** cosas que cambiar:
 
    ```js
-   firebase: {
+   // ▼ PASO 1 — reemplaza este bloque completo por el que copiaste de Firebase
+   const firebaseConfig = {
      apiKey: "AIza…",
      authDomain: "traa-academia.firebaseapp.com",
      databaseURL: "https://traa-academia-default-rtdb.firebaseio.com",
      projectId: "traa-academia",
-     appId: "1:…:web:…",
-   },
-   adminEmail: "tu-correo@empresa.com",
+     storageBucket: "traa-academia.firebasestorage.app",
+     messagingSenderId: "…",
+     appId: "1:…:web:…"
+   };
+
+   // ▼ PASO 2 — escribe el correo del administrador entre las comillas
+   const adminEmail = "tu-correo@empresa.com";
    ```
 
-   Verifica que `databaseURL` esté presente (aparece después de crear la Realtime Database).
-6. Sube el cambio a GitHub. La insignia de la app cambiará de **DEMO** a **EN VIVO**.
+   - **No modifiques** la línea `export const CONFIG = {` ni lo que está debajo (salvo puntos o tiempos).
+   - Verifica que el bloque incluya `databaseURL`. Si falta, crea primero la Realtime Database (paso 3) y vuelve a copiar la configuración.
+   - Para volver al modo demostración, cambia el bloque del paso 1 por `const firebaseConfig = null;`.
+6. Guarda con **Commit changes**. La insignia de la app cambiará de **DEMO** a **EN VIVO**.
 
 > Los datos de `firebaseConfig` no son secretos: identifican el proyecto. La seguridad la dan las reglas de
 > `database.rules.json`: solo el administrador puede lanzar evaluaciones y escribir puntajes; cada concursante
