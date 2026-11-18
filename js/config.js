@@ -22,7 +22,7 @@ export const CONFIG = {
   //      projectId: "traa-academia",
   //      appId: "1:123:web:abc",
   //    },
-  firebase: const firebaseConfig = {
+  firebase: {
   apiKey: "AIzaSyDLbtQihknvfkxdmB_PfLvWpLgezCufOFg",
   authDomain: "traa-academia.firebaseapp.com",
   databaseURL: "https://traa-academia-default-rtdb.firebaseio.com",
